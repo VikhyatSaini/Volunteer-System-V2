@@ -1,0 +1,48 @@
+/volunteer-registration-system
+└── /backend                 <-- Your entire Node.js application lives here
+    ├── node_modules/        <-- All your installed npm packages
+    ├── .env                 <-- **CRITICAL:** Store secrets here (DB connection string, JWT secret)
+    ├── .gitignore           <-- Tells Git to ignore files (like .env and node_modules)
+    ├── package.json         <-- Project info and list of dependencies
+    ├── server.js            <-- **START HERE:** The main entry point of your application
+    |
+    ├── /config/
+    │   └── db.js            <-- All database connection logic (Mongoose connect)
+    |
+    ├── /models/
+    │   ├── user.model.js    <-- **User Schema:** Defines name, email, password, role, availability, skills
+    │   ├── event.model.js   <-- **Event Schema:** Defines title, description, date, location, slots
+    │   └── registration.model.js <-- **Registration Schema:** Links a user to an event (userId, eventId)
+    |
+    ├── /routes/
+    │   ├── auth.routes.js   <-- Handles login: POST /api/auth/login
+    │   ├── user.routes.js   <-- Handles: POST /api/users/register, GET /api/users/me, PUT /api/users/me
+    │   └── event.routes.js  <-- Handles all event logic:
+    │                          - GET /api/events (Get all)
+    │                          - POST /api/events (Admin: Create event)
+    │                          - GET /api/events/:id (Get one)
+    │                          - PUT /api/events/:id (Admin: Update event)
+    │                          - DELETE /api/events/:id (Admin: Delete event)
+    │                          - POST /api/events/:id/register (Volunteer: Sign up)
+    │                          - DELETE /api/events/:id/unregister (Volunteer: Un-register)
+    │                          - GET /api/events/:id/volunteers (Admin: See who signed up)
+    |
+    ├── /controllers/
+    │   ├── auth.controller.js   <-- Logic for loginUser()
+    │   ├── user.controller.js   <-- Logic for registerUser(), getUserProfile(), updateUserProfile()
+    │   └── event.controller.js  <-- **CORE LOGIC:** All functions for the event routes above (createEvent(), getAllEvents(), registerForEvent(), etc.)
+    |
+    └── /middleware/
+        ├── auth.middleware.js   <-- **Security:** Checks for a valid JWT token. Protects routes.
+        ├── admin.middleware.js  <-- **Security:** Checks if req.user.role === 'admin'.
+        └── error.middleware.js  <-- (Advanced) A central place to catch all errors.
+
+use socket.io for faster notification 
+to do:
+implement email logic,  and google login
+jest supertest for testing the apis
+pagination and waiting list
+when user register no of slots dec in frontend but for another user he sees total slots again. is it slot number not updating in the backend
+profile pucture doesnt show on frotend after adding it. is it frontend issue
+contact us
+make pending as punidhment or temp ban of a week
