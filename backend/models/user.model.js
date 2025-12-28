@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-const crypto = require('crypto'); // Built-in Node.js module (Moved to top for cleaner scope)
+const crypto = require('crypto'); // Built-in Node.js module
 
 const userSchema = new mongoose.Schema(
   {
@@ -12,6 +12,11 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
+    },
+    // --- NEW FIELD ADDED HERE ---
+    mobileNumber: {
+      type: String,
+      default: '', // Optional by default to prevent errors for existing users
     },
     password: {
       type: String,
@@ -87,6 +92,3 @@ userSchema.methods.createPasswordResetToken = function () {
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;
-
-
-

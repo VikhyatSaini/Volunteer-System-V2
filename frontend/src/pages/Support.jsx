@@ -1,17 +1,38 @@
 import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query'; // 👈 Import React Query
-import { Mail, ChevronDown, Send, Loader2, HelpCircle, LifeBuoy, Sparkles, MessageSquare, User, CheckCircle2 } from 'lucide-react';
+import { useQuery } from '@tanstack/react-query';
+import { Mail, ChevronDown, Send, Loader2, HelpCircle, LifeBuoy, Sparkles, MessageSquare, CheckCircle2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { format } from 'date-fns'; // 👈 Date formatting
+import { format } from 'date-fns';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
-import { Badge } from '../components/ui/badge'; // 👈 Badge
+import { Badge } from '../components/ui/badge';
 import toast from 'react-hot-toast';
 import api from '../lib/axios';
 
-// ... (keep existing faqs array) ...
-const faqs = [ /* ... same as before ... */ ];
+// --- ADDED FAQ DATA HERE ---
+const faqs = [
+  {
+    question: "How do I log my volunteer hours?",
+    answer: "Go to 'My History' in your dashboard. Click the 'Log Hours' button next to the event you attended. Fill in the details and submit. An admin will review and approve them."
+  },
+  {
+    question: "Can I cancel my registration for an event?",
+    answer: "Yes. Go to 'My Dashboard', find the event under 'Upcoming Events', and click 'Unregister'. Please do this at least 24 hours in advance."
+  },
+  {
+    question: "How do I get my volunteer certificate?",
+    answer: "Once your hours are approved by an admin, you can go to your Profile or History page to download an automated certificate of appreciation."
+  },
+  {
+    question: "What happens if an event is full?",
+    answer: "You can join the Waitlist. If a spot opens up (someone unregisters), you will be automatically notified or registered depending on the event settings."
+  },
+  {
+    question: "How do I update my profile or password?",
+    answer: "Click on your avatar in the top right corner and select 'Settings'. You can update your bio, skills, mobile number, and password there."
+  }
+];
 
 const Support = () => {
   const [openFaq, setOpenFaq] = useState(0); 
@@ -56,9 +77,8 @@ const Support = () => {
       className="max-w-5xl pb-10 mx-auto space-y-8"
     >
       
-      {/* 1. Hero Section (Keep same as before) */}
+      {/* 1. Hero Section */}
       <div className="relative overflow-hidden border shadow-2xl rounded-3xl bg-slate-900 border-slate-800">
-         {/* ... (Keep background divs same as previous code) ... */}
          <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 opacity-90"></div>
          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20"></div>
          
@@ -81,7 +101,6 @@ const Support = () => {
         
         {/* 2. FAQ Section (Left) */}
         <div className="space-y-6 lg:col-span-7">
-           {/* ... (Keep FAQ Header same as before) ... */}
            <div className="flex items-center gap-3 mb-2">
             <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-indigo-500/10">
                <HelpCircle className="text-indigo-400" size={22} />

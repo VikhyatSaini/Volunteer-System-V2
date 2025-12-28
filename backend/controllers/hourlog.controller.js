@@ -103,5 +103,3 @@ module.exports = {
   getPendingHours,
   updateHourLogStatus,
 };
-
-//ghj

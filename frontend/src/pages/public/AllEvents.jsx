@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   MapPin, Search, Loader2, ArrowRight, CheckCircle2, 
-  ChevronLeft, ChevronRight, Eye, XCircle, ClipboardList, Calendar, Sparkles 
+  ChevronLeft, ChevronRight, Eye, Calendar, Sparkles 
 } from 'lucide-react';
 import { format, startOfDay } from 'date-fns';
 import toast from 'react-hot-toast';
@@ -40,7 +40,6 @@ const AllEvents = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const queryClient = useQueryClient();
 
-  // Helper to check if we are currently inside the dashboard
   const isDashboard = location.pathname.includes('/dashboard');
 
   // 1. Fetch All Events
@@ -188,7 +187,6 @@ const AllEvents = () => {
   if (isError) return <div className="mt-20 text-center text-red-400">Failed to load events.</div>;
 
   return (
-    // --- UPDATED CONTAINER LOGIC ---
     <div className={`
       ${!isDashboard ? 'min-h-screen bg-[#0f172a] px-4 sm:px-6 lg:px-8 py-12' : 'w-full'}
     `}>
@@ -239,6 +237,7 @@ const AllEvents = () => {
         {/* Events Grid */}
         {currentEvents.length > 0 ? (
           <motion.div 
+            key={currentPage} // <--- THIS IS THE FIX: Resets animation on page change
             variants={containerVariants}
             initial="hidden"
             animate="visible"
@@ -263,7 +262,6 @@ const AllEvents = () => {
                         navigate(path);
                       }}
                     >
-                      {/* Image Section */}
                       <div className="relative overflow-hidden h-44">
                         <div className="absolute inset-0 z-10 bg-gradient-to-t from-slate-900 via-transparent to-transparent" />
                         <img 
@@ -279,7 +277,6 @@ const AllEvents = () => {
                         </div>
                       </div>
 
-                      {/* Content */}
                       <CardHeader className="p-5 pb-2">
                         <div className="flex items-start justify-between mb-2">
                           <div className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1 bg-emerald-500/10 px-2 py-1 rounded-md">
@@ -317,7 +314,6 @@ const AllEvents = () => {
                         </div>
                       </CardContent>
 
-                      {/* Footer Buttons */}
                       <CardFooter className="grid grid-cols-2 gap-3 p-5 pt-0 mt-auto">
                         <Button 
                           variant="outline" 

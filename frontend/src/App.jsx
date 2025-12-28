@@ -9,6 +9,8 @@ import EventDetails from './pages/public/EventDetails';
 // --- 2. Auth Pages ---
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
+import ForgotPassword from './pages/auth/ForgotPassword';
+import ResetPassword from './pages/auth/ResetPassword';
 
 // --- 3. Admin Pages ---
 import AdminDashboard from './pages/admin/AdminDashboard';
@@ -59,6 +61,8 @@ function App() {
           <Route element={<AuthLayout />}>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/resetpassword/:token" element={<ResetPassword />} />
           </Route>
           
 
